@@ -1,16 +1,21 @@
 import api from "./api";
 
-/* =========================
-   CREATE GROUP
-========================= */
+/*  CREATE GROUP */
 export const createGroup = async (payload) => {
   const res = await api.post("/group", payload);
   return res.data.data; // single group object
 };
 
-/* =========================
-   JOIN GROUP
-========================= */
+/* LOG WORKOUT */
+export const logGroupWorkout = async (groupId, payload) => {
+  const res = await api.post("/group/workout", {
+    groupId,
+    ...payload,
+  });
+
+  return res.data.data;
+};
+/* JOIN GROUP */
 export const joinGroup = async (groupId) => {
   const res = await api.post("/group/join", { groupId });
   return res.data.data;
@@ -44,4 +49,24 @@ export const getGroupStats = async (groupId) => {
 export const getGroupLeaderboard = async (groupId) => {
   const res = await api.get(`/group/${groupId}/leaderboard`);
   return res.data.data; // array (camelCase keys)
+};
+
+/* DELETE GROUP */
+export const deleteGroup = async (groupId) => {
+  const res = await api.delete(`/group/${groupId}`);
+  return res.data;
+};
+
+export const checkGroupMembership = async (groupId) => {
+  const res = await api.get(`/group/${groupId}/is-member`);
+  return res.data.data; // boolean
+};
+export const leaveGroup = async (groupId) => {
+  const res = await api.delete(`/group/${groupId}/leave`);
+  return res.data;
+};
+
+export const getGroupMembers = async (groupId) => {
+  const res = await api.get(`/group/${groupId}/members`);
+  return res.data.data;
 };

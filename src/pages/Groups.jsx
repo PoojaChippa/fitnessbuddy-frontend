@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { createGroup, getMyGroups } from "../services/group.service";
+import {
+  createGroup,
+  getMyGroups,
+  deleteGroup,
+} from "../services/group.service";
 import { useNavigate } from "react-router-dom";
 
 export default function Groups() {
@@ -93,13 +97,28 @@ export default function Groups() {
             {groups.map((g) => (
               <div
                 key={g.id}
-                className="border rounded-xl p-4 cursor-pointer hover:bg-gray-50 transition"
-                onClick={() => navigate(`/groups/${g.id}`)}
+                className="border rounded-xl p-4 flex justify-between items-center"
               >
-                <p className="font-semibold">{g.name}</p>
-                <p className="text-sm text-gray-500">
-                  Goal: {g.goal_type} | Target: {g.target_value}
-                </p>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => navigate(`/groups/${g.id}`)}
+                >
+                  <p className="font-semibold">{g.name}</p>
+                  <p className="text-sm text-gray-500">
+                    Goal: {g.goal_type} | Target: {g.target_value}
+                  </p>
+                </div>
+
+                <button
+                  onClick={async () => {
+                    if (!window.confirm("Delete this group?")) return;
+                    await deleteGroup(g.id);
+                    loadGroups();
+                  }}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
