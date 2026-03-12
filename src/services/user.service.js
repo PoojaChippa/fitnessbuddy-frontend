@@ -19,3 +19,12 @@ export const updateProfile = async (payload) => {
 
   return res.data.data;
 };
+export const getUserById = async (userId) => {
+  const res = await api.get(`/user/${userId}`);
+
+  if (!res.data?.success) {
+    throw new Error("Failed to fetch user");
+  }
+
+  return res.data.data;
+};

@@ -11,6 +11,7 @@ import Groups from "./pages/Groups";
 import GroupDetails from "./pages/GroupDetails";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
+import Challenges from "./pages/Challenges";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/messages/:userId" element={<Messages />} />
           <Route path="/groups" element={<Groups />} />
           <Route path="/groups/:groupId" element={<GroupDetails />} />
+          <Route path="/challenges" element={<Challenges />} />
         </Route>
 
         {/* Catch All */}

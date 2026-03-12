@@ -10,6 +10,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
     { path: "/dashboard", label: "Dashboard" },
     { path: "/matches", label: "Matches" },
     { path: "/groups", label: "Groups" },
+    { path: "/challenges", label: "Challenges" },
   ];
 
   const renderLinks = () =>

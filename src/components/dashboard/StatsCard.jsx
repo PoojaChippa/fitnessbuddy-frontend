@@ -1,9 +1,9 @@
-export default function StatCard({ title, value }) {
+export default function StatCard({ title, value, color }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
-      <h3 className="text-sm text-gray-500 uppercase tracking-wide">{title}</h3>
+    <div className="dashboard-card">
+      <p className="dashboard-card-title">{title}</p>
 
-      <p className="text-4xl font-semibold mt-3 text-gray-900">{value}</p>
+      <p className={`dashboard-card-value ${color ?? ""}`}>{value}</p>
     </div>
   );
 }

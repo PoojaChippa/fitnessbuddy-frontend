@@ -695,4 +695,854 @@
     .profile-container {
         overflow: visible !important;
     }
+
+    /* ===============================
+   DASHBOARD
+================================ */
+
+    .dashboard-container {
+        @apply max-w-7xl mx-auto px-6 py-8;
+    }
+
+    .dashboard-header {
+        @apply mb-8;
+    }
+
+    .dashboard-title {
+        @apply text-2xl font-semibold tracking-tight;
+    }
+
+    .dashboard-subtitle {
+        @apply text-sm text-muted-foreground mt-1;
+    }
+
+    /* Grid */
+
+    .dashboard-grid {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+    }
+
+    /* Card Skeleton */
+
+    .dashboard-skeleton {
+        @apply h-28 rounded-2xl animate-pulse;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Dashboard Card */
+
+    .dashboard-card {
+        @apply p-6 rounded-2xl border transition-all duration-300;
+        background: rgba(255, 255, 255, 0.9);
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark .dashboard-card {
+        background: rgba(30, 41, 59, 0.8);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dashboard-card-title {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .dashboard-card-value {
+        @apply text-2xl font-bold mt-2;
+    }
+
+    .charts-grid {
+        @apply grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10;
+    }
+
+    .chart-card {
+        @apply p-6 rounded-2xl border;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .dark .chart-card {
+        background: rgba(30, 41, 59, 0.8);
+    }
+
+    .bmi-progress-card {
+        @apply p-6 rounded-2xl border mt-10 text-center;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .dark .bmi-progress-card {
+        background: rgba(30, 41, 59, 0.8);
+    }
+
+    .bmi-circle {
+        width: 150px;
+        margin: 20px auto;
+    }
+
+    .bmi-title {
+        @apply font-semibold text-lg;
+    }
+
+    .bmi-info {
+        @apply text-sm text-muted-foreground mt-1;
+    }
+
+    /* PAGE */
+    .page-container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8;
+    }
+
+    .page-header {
+        @apply space-y-1;
+    }
+
+    .page-title {
+        @apply text-2xl font-semibold;
+    }
+
+    .page-subtitle {
+        @apply text-gray-500 text-sm;
+    }
+
+    /* GRID LAYOUT */
+    .workout-layout {
+        @apply grid grid-cols-1 lg:grid-cols-3 gap-8;
+    }
+
+    /* CARDS */
+    .workout-form-card,
+    .workout-history-card {
+        @apply p-6 rounded-2xl border transition;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .dark .workout-form-card,
+    .dark .workout-history-card {
+        background: rgba(30, 41, 59, 0.8);
+    }
+
+    .workout-history-card {
+        @apply lg:col-span-2;
+    }
+
+    /* TITLES */
+    .card-title {
+        @apply text-lg font-semibold mb-4;
+    }
+
+    /* FORM */
+    .workout-form {
+        @apply space-y-4;
+    }
+
+    .workout-input {
+        @apply w-full p-3 border border-gray-300 rounded-xl outline-none transition;
+    }
+
+    .workout-input:focus {
+        border-color: #dd2476;
+        box-shadow: 0 0 0 2px rgba(221, 36, 118, 0.2);
+    }
+
+    /* BUTTON */
+    .workout-button {
+        @apply w-full py-3 rounded-xl text-white font-semibold transition;
+        background: linear-gradient(90deg, #ff512f, #dd2476, #8e2de2);
+    }
+
+    .workout-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
+    }
+
+    /* WORKOUT GRID */
+    .workout-grid {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+    }
+
+    .workout-card {
+        @apply flex justify-between items-center p-4 rounded-xl border transition;
+        background: rgba(255, 255, 255, 0.8);
+    }
+
+    .workout-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark .workout-card {
+        background: rgba(30, 41, 59, 0.8);
+    }
+
+    .workout-left {
+        @apply flex items-center gap-3;
+    }
+
+    .workout-icon {
+        @apply text-xl;
+    }
+
+    .workout-type {
+        @apply font-semibold capitalize;
+    }
+
+    .workout-meta {
+        @apply text-sm text-gray-500;
+    }
+
+    .workout-delete {
+        @apply text-red-500 text-sm font-medium transition;
+    }
+
+    .workout-delete:hover {
+        @apply text-red-700;
+    }
+
+    /* LOADING */
+    .workout-loading {
+        @apply space-y-4;
+    }
+
+    .workout-skeleton {
+        @apply h-16 bg-gray-200 rounded-xl animate-pulse;
+    }
+
+    /* EMPTY */
+    .workout-empty {
+        @apply text-gray-500 text-sm;
+    }
+
+    /* =================================================
+   MATCHES PAGE
+================================================= */
+
+    .matches-container {
+        @apply max-w-6xl mx-auto p-6 md:p-10 space-y-8;
+    }
+
+    .matches-header {
+        @apply space-y-1;
+    }
+
+    .matches-title {
+        @apply text-3xl font-bold tracking-tight;
+    }
+
+    .matches-subtitle {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .matches-grid {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6;
+    }
+
+    .matches-loading {
+        @apply text-center p-20 text-lg text-muted-foreground;
+    }
+
+    .matches-error {
+        @apply text-center p-10 text-red-600;
+    }
+
+    .matches-empty {
+        @apply text-center text-muted-foreground;
+    }
+
+
+    /* =================================================
+   MATCH CARD
+================================================= */
+
+    .match-card {
+        @apply bg-white dark:bg-card border border-border rounded-2xl p-6 transition-all duration-300;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+    }
+
+    .match-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header */
+
+    .match-header {
+        @apply flex items-center justify-between mb-5;
+    }
+
+    .match-user {
+        @apply flex items-center gap-4;
+    }
+
+    /* Avatar */
+
+    .match-avatar {
+        @apply h-12 w-12 rounded-full flex items-center justify-center text-white font-bold text-sm;
+        background: linear-gradient(135deg, #ff512f, #dd2476, #8e2de2);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        border: 2px solid white;
+    }
+
+    .match-name {
+        @apply font-semibold text-sm;
+    }
+
+    /* Match score */
+
+    .match-score {
+        @apply text-xs font-semibold px-3 py-1 rounded-full text-white;
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+        box-shadow: 0 5px 12px rgba(34, 197, 94, 0.4);
+    }
+
+
+    /* Info */
+
+    .match-info {
+        @apply space-y-1 text-sm text-muted-foreground mt-3;
+    }
+
+    .match-info strong {
+        @apply text-foreground;
+    }
+
+
+    /* Button */
+
+    .match-button {
+        @apply w-full mt-5 py-2 rounded-lg text-white font-semibold transition-all duration-300;
+        background: linear-gradient(90deg, #ff512f, #dd2476, #8e2de2);
+        background-size: 200% auto;
+    }
+
+    .match-button:hover {
+        background-position: right center;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(221, 36, 118, 0.4);
+    }
+
+    /* =================================================
+   MATCH LOADING SKELETON
+================================================= */
+
+    .match-skeleton {
+        @apply rounded-xl border border-border p-6 animate-pulse;
+        height: 140px;
+
+        background: linear-gradient(90deg,
+                rgba(229, 231, 235, 0.6) 25%,
+                rgba(229, 231, 235, 0.9) 50%,
+                rgba(229, 231, 235, 0.6) 75%);
+    }
+
+    .dark .match-skeleton {
+        background: linear-gradient(90deg,
+                rgba(51, 65, 85, 0.4) 25%,
+                rgba(71, 85, 105, 0.6) 50%,
+                rgba(51, 65, 85, 0.4) 75%);
+    }
+
+    .refresh-button {
+        @apply px-5 py-2 text-sm font-semibold text-white rounded-lg transition;
+        background: linear-gradient(90deg, #ff512f, #dd2476, #8e2de2);
+    }
+
+    .refresh-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
+    }
+
+    /* =========================
+   CHAT CONTAINER
+========================= */
+
+    .chat-container {
+        @apply max-w-3xl mx-auto h-[80vh] flex flex-col rounded-2xl border overflow-hidden;
+
+        background: white;
+        border-color: #e2e8f0;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.06),
+            0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .dark .chat-container {
+        background: #1e293b;
+        border-color: #334155;
+    }
+
+
+    /* =========================
+   CHAT HEADER
+========================= */
+
+    .chat-header {
+        @apply flex items-center gap-3 px-4 py-3 border-b;
+
+        background: #f8fafc;
+        border-color: #e2e8f0;
+    }
+
+    .dark .chat-header {
+        background: #0f172a;
+        border-color: #334155;
+    }
+
+    .chat-avatar {
+        @apply w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-sm;
+
+        background: linear-gradient(135deg, #ff512f, #dd2476, #8e2de2);
+    }
+
+    .chat-user-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: #0f172a;
+    }
+
+    .dark .chat-user-name {
+        color: white;
+    }
+
+    .chat-user-status {
+        font-size: 12px;
+        color: #94a3b8;
+    }
+
+
+    /* =========================
+   MESSAGE AREA
+========================= */
+
+    .chat-messages {
+        @apply flex-1 overflow-y-auto p-4 space-y-3;
+
+        background: #f1f5f9;
+    }
+
+    .dark .chat-messages {
+        background: #020617;
+    }
+
+    .chat-row {
+        @apply flex w-full;
+    }
+
+    .chat-left {
+        @apply justify-start;
+    }
+
+    .chat-right {
+        @apply justify-end;
+    }
+
+
+    /* =========================
+   MESSAGE BUBBLES
+========================= */
+
+    .chat-bubble {
+        @apply px-4 pt-2 pb-6 text-sm break-words relative;
+
+        max-width: 70%;
+        min-width: 60px;
+        display: inline-block;
+    }
+
+    .chat-mine {
+        @apply text-white;
+        background: linear-gradient(135deg, #ef4444, #ec4899);
+        border-radius: 16px 16px 4px 16px;
+    }
+
+    .chat-other {
+        @apply bg-white border border-slate-200 text-slate-800;
+        border-radius: 16px 16px 16px 4px;
+    }
+
+    .dark .chat-other {
+        @apply bg-slate-800 border-slate-700 text-white;
+    }
+
+    /* timestamp */
+
+    .chat-time {
+        position: absolute;
+        bottom: 4px;
+        right: 10px;
+        font-size: 10px;
+        white-space: nowrap;
+        opacity: 0.8;
+    }
+
+
+    /* =========================
+   INPUT AREA
+========================= */
+
+    .chat-input-area {
+        @apply flex items-center gap-2 px-3 py-3 border-t relative;
+
+        background: white;
+    }
+
+    .dark .chat-input-area {
+        @apply bg-slate-900 border-slate-700;
+    }
+
+    .chat-input {
+        @apply flex-1 px-4 py-2 rounded-full text-sm border outline-none;
+
+        border-color: #e2e8f0;
+    }
+
+    .chat-input:focus {
+        border-color: #ff512f;
+    }
+
+
+    /* =========================
+   SEND BUTTON
+========================= */
+
+    .chat-send {
+        @apply px-4 py-2 rounded-lg text-sm font-semibold text-white transition;
+
+        background: linear-gradient(135deg, #ff512f, #dd2476, #8e2de2);
+    }
+
+    .chat-send:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(221, 36, 118, 0.35);
+    }
+
+
+
+    /* =========================
+   EMOJI BUTTON
+========================= */
+
+    .emoji-toggle {
+        @apply text-xl p-2 rounded-full transition-colors duration-200 flex items-center justify-center;
+    }
+
+    .emoji-toggle:hover {
+        @apply bg-slate-200;
+    }
+
+    .dark .emoji-toggle:hover {
+        @apply bg-slate-700;
+    }
+
+
+    /* =========================
+   EMOJI PICKER CONTAINER
+========================= */
+
+    .emoji-picker {
+        @apply absolute bottom-16 left-2 w-[320px] rounded-xl border shadow-xl;
+        @apply bg-white border-slate-200;
+    }
+
+    .dark .emoji-picker {
+        @apply bg-slate-800 border-slate-700;
+    }
+
+
+    /* =========================
+   EMOJI MART INTERNAL FIX
+========================= */
+
+    .emoji-picker em-emoji-picker {
+        max-height: 360px !important;
+    }
+
+    .emoji-picker em-emoji {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+
+    /* Fix search input */
+
+    .emoji-picker input {
+        @apply rounded-md border border-slate-200 px-2 py-1 text-sm;
+    }
+
+    .dark .emoji-picker input {
+        @apply border-slate-600 bg-slate-700 text-white;
+    }
+
+    /* hover */
+
+    .emoji-picker em-emoji:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 6px;
+    }
+
+    /* category bar */
+
+    .emoji-picker em-category-nav {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 6px;
+    }
+
+    .dark .emoji-picker em-category-nav {
+        border-color: #334155;
+    }
+
+    /* =========================
+   SCROLLBAR
+========================= */
+
+    .chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+        background: #cbd5f5;
+        border-radius: 10px;
+    }
+
+
+    /* =========================
+   SYSTEM EMOJIS
+========================= */
+
+    .chat-container,
+    .chat-bubble,
+    .chat-input {
+        font-family:
+            "Apple Color Emoji",
+            "Segoe UI Emoji",
+            "Noto Color Emoji",
+            sans-serif;
+    }
+
+    /* CONTAINER */
+
+    .challenges-container {
+        @apply max-w-6xl mx-auto space-y-10;
+    }
+
+
+    /* CREATE CARD */
+
+    .challenge-create-card {
+        @apply p-6 rounded-2xl border space-y-4 transition-all duration-300;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+    }
+
+    .dark .challenge-create-card {
+        background: rgba(30, 41, 59, 0.85);
+    }
+
+
+    /* FORM */
+
+    .challenge-form {
+        @apply space-y-4;
+    }
+
+
+    /* INPUTS */
+
+    .challenge-input {
+        @apply w-full p-3 rounded-xl border text-sm outline-none transition;
+        border-color: rgba(0, 0, 0, 0.12);
+        background: rgba(255, 255, 255, 0.96);
+    }
+
+    .challenge-input:hover {
+        border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .challenge-input:focus {
+        border-color: #dd2476;
+        box-shadow: 0 0 0 2px rgba(221, 36, 118, 0.15);
+    }
+
+
+    /* SELECT DROPDOWN */
+
+    .challenge-select {
+        @apply w-full p-3 pr-10 rounded-xl border text-sm outline-none;
+        border-color: rgba(0, 0, 0, 0.12);
+
+        appearance: none;
+
+        background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 16px;
+    }
+
+    .challenge-select:focus {
+        border-color: #dd2476;
+        box-shadow: 0 0 0 2px rgba(221, 36, 118, 0.15);
+    }
+
+
+    /* CREATE BUTTON */
+
+    .challenge-create-btn {
+        @apply w-full py-3 rounded-xl font-semibold text-white transition;
+        background: linear-gradient(90deg, #ff512f, #dd2476, #8e2de2);
+    }
+
+    .challenge-create-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 30px rgba(221, 36, 118, 0.35);
+    }
+
+
+    /* SECTION TITLES */
+
+    .challenges-container h3 {
+        @apply text-lg font-semibold mt-6 mb-2;
+    }
+
+
+    /* GRID */
+
+    .challenge-grid {
+        @apply grid md:grid-cols-2 gap-6;
+    }
+
+
+    /* CARD */
+
+    .challenge-card {
+        @apply p-5 rounded-2xl border space-y-3 transition-all duration-300;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .challenge-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+    }
+
+    .dark .challenge-card {
+        background: rgba(30, 41, 59, 0.85);
+    }
+
+
+    /* CARD TEXT */
+
+    .card-title {
+        @apply text-lg font-semibold;
+    }
+
+    .card-desc {
+        @apply text-sm text-muted-foreground;
+    }
+
+    .card-goal {
+        @apply text-sm font-medium pb-2 border-b;
+        border-color: rgba(0, 0, 0, 0.06);
+    }
+
+
+    /* JOIN BUTTON */
+
+    .challenge-join-btn {
+        @apply px-4 py-2 rounded-lg text-sm font-semibold text-white transition;
+        background: linear-gradient(90deg, #3b82f6, #2563eb);
+    }
+
+    .challenge-join-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+    }
+
+
+    /* PROGRESS BAR */
+
+    .challenge-progress-bar {
+        @apply w-full h-2 rounded-full mt-2 overflow-hidden;
+        background: rgba(0, 0, 0, 0.08);
+    }
+
+    .challenge-progress-fill {
+        @apply h-full rounded-full transition-all duration-500;
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+
+    /* ACTIONS */
+
+    .challenge-actions {
+        @apply flex items-center gap-2 mt-3;
+    }
+
+    .challenge-progress-input {
+        @apply flex-1 p-2 rounded-lg border text-sm outline-none;
+    }
+
+    .challenge-progress-input:focus {
+        border-color: #22c55e;
+        box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    }
+
+
+    /* LOG BUTTON */
+
+    .challenge-log-btn {
+        @apply px-4 py-2 rounded-lg text-white font-semibold text-sm transition;
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+    .challenge-log-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+    }
+
+
+    /* DELETE */
+
+    .challenge-delete-btn {
+        @apply px-3 py-2 rounded-lg text-sm font-semibold text-white transition;
+        background: linear-gradient(90deg, #ef4444, #dc2626);
+    }
+
+    .challenge-delete-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
+    }
+
+
+    /* EXIT */
+
+    .challenge-exit-btn {
+        @apply px-3 py-2 rounded-lg text-sm font-semibold text-white transition;
+        background: linear-gradient(90deg, #f87171, #ef4444);
+    }
+
+    .challenge-exit-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+    }
+
+
+    /* LEADERBOARD */
+
+    .leaderboard {
+        @apply mt-3 text-sm space-y-1;
+    }
+
+    .leaderboard-title {
+        @apply font-semibold text-gray-600;
+    }
+
+    .leaderboard-row {
+        @apply text-gray-500;
+    }
 }

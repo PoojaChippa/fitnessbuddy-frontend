@@ -1,83 +1,269 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getMatches } from "../services/match.service";
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { sendMessage, getConversation } from "../services/message.service";
+import { getUserById } from "../services/user.service";
 
-export default function Matches() {
-  const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [errorMsg, setErrorMsg] = useState("");
-  const navigate = useNavigate();
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
+
+export default function Messages() {
+  const { userId } = useParams();
+
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState("");
+  const [otherUser, setOtherUser] = useState(null);
+  const [showEmoji, setShowEmoji] = useState(false);
+
+  const messagesEndRef = useRef(null);
+  const emojiRef = useRef(null);
+
+  const currentUserId = JSON.parse(localStorage.getItem("user"))?.id;
+
+  /* =========================
+     FORMAT TIME
+  ========================= */
+
+  const formatTime = (timestamp) => {
+    if (!timestamp) return "";
+
+    const date = new Date(timestamp);
+
+    return date.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
+  /* =========================
+     LOAD MESSAGES
+  ========================= */
+
+  const loadMessages = async () => {
+    try {
+      const res = await getConversation(userId);
+      const incoming = res.data || [];
+
+      setMessages((prev) => {
+        const ids = new Set(prev.map((m) => m.id));
+        const newMsgs = incoming.filter((m) => !ids.has(m.id));
+        return [...prev, ...newMsgs];
+      });
+    } catch (err) {
+      console.error("Error loading messages", err);
+    }
+  };
+
+  /* =========================
+     LOAD USER
+  ========================= */
+
+  const loadUser = async () => {
+    try {
+      const res = await getUserById(userId);
+      setOtherUser(res);
+    } catch (err) {
+      console.error("User load error", err);
+    }
+  };
+
+  /* =========================
+     INITIAL LOAD
+  ========================= */
 
   useEffect(() => {
-    const loadMatches = async () => {
-      try {
-        setLoading(true);
+    const initChat = async () => {
+      await loadMessages();
+      await loadUser();
+    };
 
-        const res = await getMatches();
+    initChat();
+  }, [userId]);
 
-        if (!res.success) {
-          setErrorMsg(res.message || "Unable to fetch matches");
-          return;
-        }
+  /* =========================
+     SAFE POLLING (avoid 429)
+  ========================= */
 
-        setMatches(res.data); // ← IMPORTANT (array)
-      } catch (error) {
-        if (error.response?.data?.message) {
-          setErrorMsg(error.response.data.message);
-        } else {
-          setErrorMsg("Complete your profile before matching");
-        }
-      } finally {
-        setLoading(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (document.visibilityState === "visible") {
+        loadMessages();
+      }
+    }, 20000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  /* =========================
+     AUTO SCROLL
+  ========================= */
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages]);
+
+  /* =========================
+     CLOSE EMOJI ON OUTSIDE CLICK
+  ========================= */
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emojiRef.current && !emojiRef.current.contains(event.target)) {
+        setShowEmoji(false);
       }
     };
 
-    loadMatches();
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
-  if (loading) return <p className="p-6 text-center">Finding matches...</p>;
+  /* =========================
+     CLOSE EMOJI ON ESC KEY
+  ========================= */
 
-  if (errorMsg)
-    return <div className="p-10 text-center text-red-600">{errorMsg}</div>;
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        setShowEmoji(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
+
+  /* =========================
+     SEND MESSAGE
+  ========================= */
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+
+    if (!text.trim()) return;
+
+    const newMessage = {
+      id: Date.now(),
+      sender_id: currentUserId,
+      receiver_id: userId,
+      text,
+      created_at: new Date(),
+    };
+
+    setMessages((prev) => [...prev, newMessage]);
+    setText("");
+
+    try {
+      await sendMessage({
+        receiver_id: userId,
+        text,
+      });
+    } catch (err) {
+      console.error("Send message error", err);
+    }
+  };
+
+  /* =========================
+     ADD EMOJI
+  ========================= */
+
+  const addEmoji = (emoji) => {
+    setText((prev) => prev + emoji.native);
+  };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 md:p-10 space-y-8">
-      <h1 className="text-3xl font-bold">Your Fitness Matches</h1>
-
-      {matches.length === 0 ? (
-        <p>No matches found based on your profile.</p>
-      ) : (
-        <div className="grid md:grid-cols-3 gap-6">
-          {matches.map((user) => (
-            <div
-              key={user.id}
-              className="bg-white shadow rounded-xl p-6 space-y-4 hover:shadow-lg transition"
-            >
-              <div className="space-y-1">
-                <p>
-                  <strong>Goal:</strong> {user.goal}
-                </p>
-                <p>
-                  <strong>Workout:</strong> {user.workout_type}
-                </p>
-                <p>
-                  <strong>City:</strong> {user.city}
-                </p>
-                <p>
-                  <strong>Gender:</strong> {user.gender}
-                </p>
-              </div>
-
-              <button
-                onClick={() => navigate(`/messages/${user.id}`)}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg"
-              >
-                Message
-              </button>
-            </div>
-          ))}
+    <div className="chat-container">
+      {/* HEADER */}
+      <div className="chat-header flex items-center gap-3">
+        <div className="chat-avatar">
+          {(otherUser?.name?.[0] || "U").toUpperCase()}
         </div>
-      )}
+
+        <div className="chat-user-info">
+          <div className="chat-user-name">
+            {otherUser?.name || "Fitness Buddy"}
+          </div>
+          <div className="chat-user-status">Active now</div>
+        </div>
+      </div>
+
+      {/* MESSAGES */}
+      <div className="chat-messages">
+        {messages.length === 0 && (
+          <p className="chat-empty">Start the conversation 👋</p>
+        )}
+
+        {messages.map((msg) => {
+          const isMine = msg.sender_id === currentUserId;
+
+          return (
+            <div
+              key={msg.id}
+              className={`chat-row ${isMine ? "chat-right" : "chat-left"}`}
+            >
+              <div
+                className={`chat-bubble ${isMine ? "chat-mine" : "chat-other"}`}
+              >
+                {msg.text}
+
+                <span className="chat-time">{formatTime(msg.created_at)}</span>
+              </div>
+            </div>
+          );
+        })}
+
+        <div ref={messagesEndRef}></div>
+      </div>
+
+      {/* INPUT */}
+      <form onSubmit={handleSend} className="chat-input-area">
+        {/* EMOJI BUTTON */}
+        <button
+          type="button"
+          className="emoji-toggle"
+          onClick={() => setShowEmoji(!showEmoji)}
+        >
+          😊
+        </button>
+
+        {/* EMOJI PICKER */}
+        {showEmoji && (
+          <div ref={emojiRef} className="emoji-picker">
+            <Picker
+              data={data}
+              onEmojiSelect={addEmoji}
+              theme={
+                document.documentElement.classList.contains("dark")
+                  ? "dark"
+                  : "light"
+              }
+              previewPosition="none"
+              skinTonePosition="none"
+              emojiSize={24}
+            />
+          </div>
+        )}
+
+        {/* INPUT */}
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type a message"
+          className="chat-input"
+        />
+
+        {/* SEND BUTTON */}
+        <button type="submit" className="chat-send">
+          ➤
+        </button>
+      </form>
     </div>
   );
 }
