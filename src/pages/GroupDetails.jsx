@@ -153,21 +153,19 @@ export default function GroupDetails() {
         <div className="group-card">
           <h2 className="group-card-title heading-underline">Progress</h2>
 
-          <div className="group-progress-row">
-            <div className="group-progress-bar">
-              <div
-                className="group-progress-fill"
-                style={{
-                  width: `${progress.percentage}%`,
-                  minWidth: "12px",
-                }}
-              />
-            </div>
-
-            <span className="group-progress-value">
-              {progress.achievedValue} / {progress.targetValue}
-            </span>
+          <div className="group-progress-bar">
+            <div
+              className="group-progress-fill"
+              style={{
+                width: `${progress.percentage}%`,
+                minWidth: "20px",
+              }}
+            />
           </div>
+
+          <span className="group-progress-value">
+            {progress.achievedValue} / {progress.targetValue}
+          </span>
         </div>
       )}
       {/* DAILY CHART */}
