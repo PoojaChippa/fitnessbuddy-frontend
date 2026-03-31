@@ -1609,9 +1609,8 @@ FORM
         @apply px-5 py-2 rounded-lg text-white font-medium bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
     }
 
-    /* =========================
-PROGRESS SECTION (FIXED)
-========================= */
+
+    /* ========================= PROGRESS SECTION (FIXED) ========================= */
 
     .group-progress-header {
         @apply flex flex-col gap-2;
