@@ -1,11 +1,13 @@
 import api from "./api";
 
-export const shareProgress = async (data) => {
-  const res = await api.post("/share", data);
-  return res.data;
+/* SHARE PROGRESS */
+export const shareProgress = async (payload) => {
+  const res = await api.post("/share", payload);
+  return res.data.data;
 };
 
+/* GET FEED */
 export const getMyFeed = async () => {
   const res = await api.get("/share/my");
-  return res.data;
+  return res.data.data;
 };

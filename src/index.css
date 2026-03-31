@@ -442,13 +442,7 @@
     /* Header */
 
     .layout-header {
-        @apply h-16 flex items-center justify-between px-8 sticky top-0 border-b;
-        background: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border-color: rgba(0, 0, 0, 0.06);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        z-index: 40;
+        @apply sticky top-0 z-50 flex justify-between items-center px-6 py-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur border-b;
     }
 
     .dark .layout-header {
@@ -1325,224 +1319,558 @@
             sans-serif;
     }
 
-    /* CONTAINER */
-
-    .challenges-container {
-        @apply max-w-6xl mx-auto space-y-10;
+    .challenge-page {
+        @apply px-6 py-8 max-w-7xl mx-auto space-y-10;
     }
-
-
-    /* CREATE CARD */
-
-    .challenge-create-card {
-        @apply p-6 rounded-2xl border space-y-4 transition-all duration-300;
-        background: rgba(255, 255, 255, 0.92);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
-    }
-
-    .dark .challenge-create-card {
-        background: rgba(30, 41, 59, 0.85);
-    }
-
-
-    /* FORM */
 
     .challenge-form {
-        @apply space-y-4;
+        @apply flex flex-col gap-4 mt-1;
     }
-
-
-    /* INPUTS */
-
-    .challenge-input {
-        @apply w-full p-3 rounded-xl border text-sm outline-none transition;
-        border-color: rgba(0, 0, 0, 0.12);
-        background: rgba(255, 255, 255, 0.96);
-    }
-
-    .challenge-input:hover {
-        border-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .challenge-input:focus {
-        border-color: #dd2476;
-        box-shadow: 0 0 0 2px rgba(221, 36, 118, 0.15);
-    }
-
-
-    /* SELECT DROPDOWN */
 
     .challenge-select {
-        @apply w-full p-3 pr-10 rounded-xl border text-sm outline-none;
-        border-color: rgba(0, 0, 0, 0.12);
-
-        appearance: none;
-
-        background-image: url("data:image/svg+xml,%3Csvg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 14px center;
-        background-size: 16px;
+        @apply border rounded-md px-3 py-2 bg-white dark:bg-zinc-800 text-sm;
     }
 
-    .challenge-select:focus {
-        border-color: #dd2476;
-        box-shadow: 0 0 0 2px rgba(221, 36, 118, 0.15);
+    .create-btn {
+        @apply w-full text-white font-semibold py-2 rounded-md bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
+    }
+
+    .challenge-section-title {
+        @apply text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-1;
+    }
+
+    .challenge-subtitle {
+        @apply text-sm text-zinc-500 dark:text-zinc-400 mb-2;
+    }
+
+    .challenge-grid {
+        @apply grid gap-6 mt-4;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+
+    .challenge-card-discover {
+        @apply rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition p-4 flex flex-col gap-3 max-w-[260px];
+    }
+
+    .challenge-card-discover h3 {
+        @apply text-base font-semibold;
+    }
+
+    .challenge-card-discover p {
+        @apply text-sm text-zinc-500;
+    }
+
+    .discover-grid {
+        @apply grid gap-4 mt-4;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+    }
+
+    .challenge-card {
+        @apply rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition p-7 flex flex-col gap-4 min-h-[260px];
+    }
+
+    .card-title {
+        @apply text-lg font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+
+    .card-desc {
+        @apply text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed;
+    }
+
+    .card-goal {
+        @apply text-sm text-zinc-600 dark:text-zinc-300;
+    }
+
+    .challenge-members {
+        @apply text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1;
+    }
+
+    .challenge-progress {
+        @apply flex items-center gap-3 mt-2;
+    }
+
+    .progress-bar {
+        @apply flex-1 h-3 rounded-full;
+    }
+
+    .progress-meta {
+        @apply text-xs font-medium text-zinc-500 dark:text-zinc-400 w-[36px] text-right;
+    }
+
+    .progress-percent {
+        @apply text-xs font-medium text-zinc-500 dark:text-zinc-400;
+    }
+
+    .leaderboard {
+        @apply mt-3 space-y-1 border-t pt-2 border-zinc-200 dark:border-zinc-700;
+    }
+
+    .leaderboard-title {
+        @apply text-amber-500 font-semibold text-sm flex items-center gap-1;
+    }
+
+    .leaderboard-row {
+        @apply text-sm text-zinc-600 dark:text-zinc-300 mt-1;
+    }
+
+    .challenge-actions {
+        @apply flex flex-col gap-2 mt-3;
+    }
+
+    .challenge-progress {
+        @apply flex items-center gap-3 mt-2;
+    }
+
+    .challenge-progress-row {
+        @apply flex items-center gap-2 w-full;
+    }
+
+    .challenge-progress-row input {
+        @apply flex-1 min-w-[160px] border border-zinc-300 dark:border-zinc-700 rounded-md px-3 py-2 text-sm bg-white dark:bg-zinc-800;
+    }
+
+    .challenge-danger-row {
+        @apply flex justify-end w-full mt-1;
+    }
+
+    .log-btn {
+        @apply px-3 py-2 text-sm font-medium rounded-md bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-700 dark:hover:bg-zinc-600 transition;
+    }
+
+    button[variant="destructive"] {
+        @apply px-3 py-2 text-sm font-medium rounded-md bg-red-500 hover:bg-red-600 text-white transition;
+    }
+
+    button[variant="secondary"] {
+        @apply px-3 py-2 text-sm font-medium rounded-md bg-zinc-200 hover:bg-zinc-300 text-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:text-white transition;
+    }
+
+    .join-btn {
+        @apply mt-3 w-fit px-4 py-1.5 rounded-md text-white font-medium text-sm bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
+    }
+
+    /* ================= GROUPS PAGE ================= */
+
+    .group-page {
+        @apply max-w-6xl mx-auto px-6 py-8 space-y-10;
+    }
+
+
+    /* CREATE GROUP CARD */
+
+    .group-create {
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm;
+    }
+
+    .group-title {
+        @apply text-xl font-semibold text-zinc-800 dark:text-zinc-200;
+    }
+
+    .group-subtitle {
+        @apply text-sm text-zinc-500 mb-4;
+    }
+
+    .group-form {
+        @apply grid md:grid-cols-4 gap-4 items-center;
+    }
+
+
+    /* INPUT */
+
+    .group-input {
+        @apply border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm bg-white dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-pink-500;
     }
 
 
     /* CREATE BUTTON */
 
-    .challenge-create-btn {
-        @apply w-full py-3 rounded-xl font-semibold text-white transition;
-        background: linear-gradient(90deg, #ff512f, #dd2476, #8e2de2);
-    }
-
-    .challenge-create-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 30px rgba(221, 36, 118, 0.35);
+    .group-create-btn {
+        @apply text-white font-semibold py-2 px-4 rounded-lg bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
     }
 
 
-    /* SECTION TITLES */
 
-    .challenges-container h3 {
-        @apply text-lg font-semibold mt-6 mb-2;
+    /* ================= GROUP LIST ================= */
+
+    .group-grid {
+        @apply grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4;
     }
 
 
-    /* GRID */
+    /* GROUP CARD */
 
-    .challenge-grid {
-        @apply grid md:grid-cols-2 gap-6;
+    .group-card {
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-5 shadow-sm flex justify-between items-start hover:shadow-md transition cursor-pointer;
+    }
+
+    .group-card-info {
+        @apply space-y-1;
+    }
+
+    .group-card-title {
+        @apply text-lg font-semibold text-zinc-800 dark:text-zinc-200;
+    }
+
+    .group-card-desc {
+        @apply text-sm text-zinc-500;
     }
 
 
-    /* CARD */
+    /* DELETE BUTTON */
 
-    .challenge-card {
-        @apply p-5 rounded-2xl border space-y-3 transition-all duration-300;
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    .group-delete-btn {
+        @apply bg-red-500 text-white px-3 py-1.5 rounded-md hover:bg-red-600 transition text-sm font-medium;
     }
 
-    .challenge-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-    }
+    /* =========================
+GROUP DETAILS PAGE
+========================= */
 
-    .dark .challenge-card {
-        background: rgba(30, 41, 59, 0.85);
+    .group-details-page {
+        @apply max-w-5xl mx-auto space-y-6 p-6;
     }
 
 
-    /* CARD TEXT */
+    /* =========================
+HEADER
+========================= */
+
+    .group-details-header {
+        @apply flex justify-between items-center;
+    }
+
+    .group-details-title {
+        @apply text-2xl font-semibold text-zinc-800;
+    }
+
+    .group-leave-btn {
+        @apply px-4 py-2 rounded-lg text-white font-medium bg-red-500 hover:bg-red-600 transition;
+    }
+
+
+    /* =========================
+CARDS
+========================= */
+
+    .group-card {
+        @apply bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 px-6 py-5 space-y-3;
+    }
+
+
+    /* =========================
+TITLE
+========================= */
+
+    .group-card-title {
+        @apply text-base font-semibold text-zinc-800 dark:text-zinc-200;
+    }
+
+    /* =========================
+GRADIENT HALF UNDERLINE
+========================= */
+
+    .heading-underline {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 6px;
+    }
+
+    .heading-underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        width: 50%;
+        height: 3px;
+
+        background: linear-gradient(90deg,
+                #ef4444,
+                #ec4899,
+                #8b5cf6);
+
+        border-radius: 6px;
+    }
+
+
+    /* =========================
+FORM
+========================= */
+
+    .group-workout-form {
+        @apply flex gap-3 flex-wrap;
+    }
+
+    .group-input {
+        @apply flex-1 min-w-[180px] px-4 py-2 rounded-lg border border-zinc-300 focus:outline-none focus:ring-2 focus:ring-pink-400;
+    }
+
+    .group-primary-btn {
+        @apply px-5 py-2 rounded-lg text-white font-medium bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
+    }
+
+    /* =========================
+PROGRESS SECTION (FIXED)
+========================= */
+
+    .group-progress-header {
+        @apply flex flex-col gap-2;
+    }
+
+    /* Title */
+    .group-card-title {
+        @apply text-lg font-semibold text-zinc-800 dark:text-zinc-200;
+    }
+
+    /* =========================
+ROW (KEY FIX)
+========================= */
+
+    .group-progress-row {
+        @apply flex items-center gap-4;
+    }
+
+
+    /* =========================
+BAR
+========================= */
+
+    .group-progress-bar {
+        @apply flex-1 h-2 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700;
+    }
+
+    .group-progress-fill {
+        height: 100%;
+        border-radius: 9999px;
+
+        background: linear-gradient(90deg,
+                #ef4444,
+                #ec4899,
+                #8b5cf6);
+
+        transition: width 0.4s ease;
+    }
+
+
+    /* =========================
+VALUE
+========================= */
+
+    .group-progress-value {
+        @apply text-sm font-medium text-zinc-600 dark:text-zinc-300 whitespace-nowrap;
+    }
+
+    /* =========================
+CHART CARD
+========================= */
+
+    .chart-card {
+        @apply bg-white rounded-xl shadow-sm border border-zinc-200 p-6 space-y-4;
+    }
+
+    .chart-title {
+        @apply text-lg font-semibold text-zinc-800;
+    }
+
+    .chart-note {
+        @apply text-sm text-zinc-500;
+    }
+
+
+    /* =========================
+BOTTOM GRID
+(Leaderboard + Members)
+========================= */
+
+    .group-bottom-grid {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+    }
+
+
+    /* =========================
+LEADERBOARD
+========================= */
+
+    .group-leaderboard {
+        @apply divide-y divide-zinc-200;
+    }
+
+    .group-leaderboard-row {
+        @apply flex justify-between items-center py-3;
+    }
+
+    .group-leaderboard-left {
+        @apply flex items-center gap-3;
+    }
+
+    .group-rank {
+        @apply font-semibold text-zinc-800;
+    }
+
+    .group-user {
+        @apply text-sm text-zinc-500;
+    }
+
+    .group-calories {
+        @apply text-sm font-semibold bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-transparent bg-clip-text;
+    }
+
+
+    /* =========================
+MEMBERS
+========================= */
+
+    .group-members {
+        @apply divide-y divide-zinc-200;
+    }
+
+    .group-member-row {
+        @apply flex items-center gap-3 py-3;
+    }
+
+    .group-avatar {
+        @apply w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-semibold bg-gradient-to-r from-red-500 via-pink-500 to-purple-500;
+    }
+
+    .group-member-name {
+        @apply text-sm text-zinc-700;
+    }
+
+
+    /* =========================
+JOIN GROUP PAGE
+========================= */
+
+    .group-join-container {
+        @apply flex flex-col items-center justify-center h-[60vh] gap-6;
+    }
+
+    .group-join-title {
+        @apply text-xl font-semibold text-zinc-800;
+    }
+
+    .group-join-btn {
+        @apply px-6 py-3 rounded-xl text-white font-medium bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition;
+    }
+
+
+    /* =========================
+LOADING
+========================= */
+
+    .group-loading {
+        @apply flex justify-center items-center h-[50vh] text-zinc-500;
+    }
+
+    /* ===== PAGE LAYOUT ===== */
+
+    .page-container {
+        @apply max-w-6xl mx-auto px-6 py-8 space-y-8;
+    }
+
+    .page-title {
+        @apply text-2xl font-semibold text-zinc-900 dark:text-zinc-100;
+    }
+
+    .page-subtitle {
+        @apply text-sm text-zinc-500 dark:text-zinc-400;
+    }
+
+
+    /* ===== CARD ===== */
+
+    .card {
+        @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm transition hover:shadow-md;
+    }
 
     .card-title {
-        @apply text-lg font-semibold;
-    }
-
-    .card-desc {
-        @apply text-sm text-muted-foreground;
-    }
-
-    .card-goal {
-        @apply text-sm font-medium pb-2 border-b;
-        border-color: rgba(0, 0, 0, 0.06);
+        @apply text-lg font-semibold mb-4 text-zinc-900 dark:text-zinc-100;
     }
 
 
-    /* JOIN BUTTON */
+    /* ===== INPUT ===== */
 
-    .challenge-join-btn {
-        @apply px-4 py-2 rounded-lg text-sm font-semibold text-white transition;
-        background: linear-gradient(90deg, #3b82f6, #2563eb);
-    }
-
-    .challenge-join-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+    .input {
+        @apply border border-zinc-300 dark:border-zinc-700 rounded-md px-3 py-2 text-sm w-full bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500;
     }
 
 
-    /* PROGRESS BAR */
+    /* ===== BUTTONS ===== */
 
-    .challenge-progress-bar {
-        @apply w-full h-2 rounded-full mt-2 overflow-hidden;
-        background: rgba(0, 0, 0, 0.08);
+    .btn-primary {
+        @apply px-4 py-2 rounded-md text-white font-medium bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 hover:opacity-90 transition shadow-sm;
     }
 
-    .challenge-progress-fill {
-        @apply h-full rounded-full transition-all duration-500;
-        background: linear-gradient(90deg, #22c55e, #4ade80);
-    }
-
-
-    /* ACTIONS */
-
-    .challenge-actions {
-        @apply flex items-center gap-2 mt-3;
-    }
-
-    .challenge-progress-input {
-        @apply flex-1 p-2 rounded-lg border text-sm outline-none;
-    }
-
-    .challenge-progress-input:focus {
-        border-color: #22c55e;
-        box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    .btn-secondary {
+        @apply px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition;
     }
 
 
-    /* LOG BUTTON */
+    /* ===== FORM GRID ===== */
 
-    .challenge-log-btn {
-        @apply px-4 py-2 rounded-lg text-white font-semibold text-sm transition;
-        background: linear-gradient(90deg, #22c55e, #4ade80);
+    .form-grid {
+        @apply grid md:grid-cols-3 gap-4;
     }
 
-    .challenge-log-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+    /* SHARE PAGE */
+
+    .share-page {
+        @apply max-w-6xl mx-auto p-6 space-y-8;
     }
 
-
-    /* DELETE */
-
-    .challenge-delete-btn {
-        @apply px-3 py-2 rounded-lg text-sm font-semibold text-white transition;
-        background: linear-gradient(90deg, #ef4444, #dc2626);
+    .share-header {
+        @apply flex flex-col gap-1;
     }
 
-    .challenge-delete-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
+    .share-title {
+        @apply text-2xl font-semibold bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 bg-clip-text text-transparent;
     }
 
-
-    /* EXIT */
-
-    .challenge-exit-btn {
-        @apply px-3 py-2 rounded-lg text-sm font-semibold text-white transition;
-        background: linear-gradient(90deg, #f87171, #ef4444);
+    .share-subtitle {
+        @apply text-sm text-zinc-500;
     }
 
-    .challenge-exit-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+    .share-form-card {
+        @apply bg-white shadow rounded-xl p-6 border-l-4 border-pink-500;
     }
 
-
-    /* LEADERBOARD */
-
-    .leaderboard {
-        @apply mt-3 text-sm space-y-1;
+    .share-feed-card {
+        @apply bg-white shadow rounded-xl p-6;
     }
 
-    .leaderboard-title {
-        @apply font-semibold text-gray-600;
+    .share-form-grid {
+        @apply grid md:grid-cols-3 gap-4;
     }
 
-    .leaderboard-row {
-        @apply text-gray-500;
+    .share-feed-item {
+        @apply flex justify-between items-center border rounded-xl p-4 hover:shadow-md transition;
+    }
+
+    .share-feed-content {
+        @apply flex flex-col gap-1;
+    }
+
+    .share-feed-title {
+        @apply font-semibold capitalize;
+    }
+
+    .share-feed-details {
+        @apply text-sm text-zinc-500;
+    }
+
+    .share-feed-date {
+        @apply text-xs text-zinc-400;
+    }
+
+    .share-social-buttons {
+        @apply flex gap-2;
+    }
+
+    .btn-social {
+        @apply px-3 py-2 rounded-md text-sm font-medium bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 text-white hover:opacity-90 transition;
+    }
+
+    .btn-social-outline {
+        @apply px-3 py-2 rounded-md text-sm border border-zinc-300 hover:bg-zinc-100;
     }
 }
