@@ -1,11 +1,12 @@
 import api from "./api";
 
 export const getDashboard = async () => {
+  const timestamp = Date.now();
   const [workoutStatsRes, userAnalyticsRes, workoutAnalyticsRes] =
     await Promise.all([
-      api.get("/workout/stats"),
-      api.get("/user/analytics"),
-      api.get("/workout/analytics"),
+      api.get(`/workout/stats?t=${timestamp}`),
+      api.get(`/user/analytics?t=${timestamp}`),
+      api.get(`/workout/analytics?t=${timestamp}`),
     ]);
 
   return {

@@ -21,9 +21,9 @@ export default function BMIProgress({ currentBMI, targetBMI }) {
         />
       </div>
 
-      <p className="bmi-info">Current BMI: {currentBMI}</p>
+      <p className="bmi-info">Current BMI: {currentBMI ?? "—"}</p>
 
-      <p className="bmi-info">Target BMI: {targetBMI}</p>
+      <p className="bmi-info">Target BMI: {targetBMI || "Not Set"}</p>
     </div>
   );
 }

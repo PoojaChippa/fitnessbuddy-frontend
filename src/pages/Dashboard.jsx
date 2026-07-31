@@ -79,14 +79,45 @@ export default function Dashboard() {
         {/* SHOW ONLY ONE GOAL */}
 
         <StatCard
-          title={data.weightToGain ? "Weight To Gain" : "Weight To Lose"}
-          value={`${data.weightToGain || data.weightToLose} kg`}
+          title={
+            !data.targetBMI
+              ? "Goal Not Set"
+              : data.weightToGain
+              ? "Weight To Gain"
+              : data.weightToLose
+              ? "Weight To Lose"
+              : "Goal Reached"
+          }
+          value={
+            !data.targetBMI
+              ? "—"
+              : data.weightToGain
+              ? `${data.weightToGain} kg`
+              : data.weightToLose
+              ? `${data.weightToLose} kg`
+              : "0 kg"
+          }
         />
 
         <StatCard
-          title="Days To Target"
-          value={data.estimatedDaysToTarget ?? "—"}
+          title="Projected Time"
+          value={
+            data.estimatedDaysToTarget
+              ? data.estimatedDaysToTarget >= 7
+                ? `${Math.floor(data.estimatedDaysToTarget / 7)} weeks, ${
+                    data.estimatedDaysToTarget % 7
+                  } days`
+                : `${data.estimatedDaysToTarget} days`
+              : "—"
+          }
         />
+
+        <StatCard
+          title="Simulated Weight"
+          value={data.simulatedWeight ? `${data.simulatedWeight} kg` : "—"}
+        />
+
+        <StatCard title="Simulated BMI" value={data.simulatedBMI ?? "—"} />
       </div>
 
       {/* CHARTS */}
